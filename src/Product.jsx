@@ -1,3 +1,4 @@
+import { css } from '@emotion/css';
 import { useState } from 'react';
 import ProductList from './components/ProductList';
 
@@ -24,7 +25,15 @@ const Product = () => {
 	]);
 
 	return (
-		<ul>
+		<ul
+			className={css`
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				width: 1000px;
+				height: 500px;
+				border: 1px solid black;
+			`}>
 			{productList.map((product) => (
 				<ProductList key={product.id} product={product} />
 			))}
