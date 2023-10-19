@@ -33,6 +33,7 @@ const ProductList = ({ product }) => {
 				setCartProductCount((prevCount) => prevCount + 1);
 			}
 		}
+		setProductCount(1);
 	};
 
 	return (

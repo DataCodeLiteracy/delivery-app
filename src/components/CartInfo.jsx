@@ -3,11 +3,19 @@ import { useContext } from 'react';
 import CartContext from '../context/CartContext';
 
 const CartInfo = () => {
-	const { setIsCart } = useContext(CartContext);
+	const { setIsCart, addProductList } = useContext(CartContext);
 
 	const handleCancel = () => {
 		setIsCart(false);
 	};
+
+	const calculateTotalPrice = () => {
+		const totalCount = addProductList.reduce((total, product) => {
+			return total + product.price * product.count;
+		}, 0);
+		return totalCount;
+	};
+	const totalCount = calculateTotalPrice();
 
 	return (
 		<div
@@ -29,7 +37,7 @@ const CartInfo = () => {
 						margin-right: 10px;
 					}
 				`}>
-				<span>20000원</span>
+				<span>{totalCount}원</span>
 				<div
 					className={css`
 						margin-top: 5px;
