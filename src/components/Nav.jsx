@@ -1,6 +1,10 @@
 import { css } from '@emotion/css';
 
-const Nav = () => {
+const Nav = ({ setIsCart }) => {
+	const handleCartClick = () => {
+		setIsCart(true);
+	};
+
 	return (
 		<nav
 			className={css`
@@ -10,16 +14,18 @@ const Nav = () => {
 				width: 1000px;
 			`}>
 			<h1>Delivery App</h1>
-			<div
+			<button
+				onClick={handleCartClick}
 				className={css`
 					display: flex;
 					border: 1px solid black;
-					width: 100px;
+					width: 150px;
 					height: 50px;
 					margin-top: 10px;
 					padding: 0 30px 0 30px;
 					justify-content: space-around;
 					align-items: center;
+					cursor: pointer;
 				`}>
 				<span>장바구니</span>
 				<div
@@ -32,7 +38,7 @@ const Nav = () => {
 					`}>
 					1
 				</div>
-			</div>
+			</button>
 		</nav>
 	);
 };
