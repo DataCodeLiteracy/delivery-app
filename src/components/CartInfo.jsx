@@ -1,6 +1,14 @@
 import { css } from '@emotion/css';
+import { useContext } from 'react';
+import CartContext from '../context/CartContext';
 
 const CartInfo = () => {
+	const { setIsCart } = useContext(CartContext);
+
+	const handleCancel = () => {
+		setIsCart(false);
+	};
+
 	return (
 		<div
 			className={css`
@@ -31,7 +39,7 @@ const CartInfo = () => {
 							cursor: pointer;
 						}
 					`}>
-					<button>취소</button>
+					<button onClick={handleCancel}>취소</button>
 					<button>결제</button>
 				</div>
 			</div>

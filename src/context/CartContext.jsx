@@ -33,6 +33,7 @@ export const CartContextProvider = (props) => {
 	const [addProductList, setAddProductList] = useState([]);
 
 	const [isCart, setIsCart] = useState(false);
+	const [cartProductCount, setCartProductCount] = useState(0);
 
 	return (
 		<CartContext.Provider
@@ -43,6 +44,8 @@ export const CartContextProvider = (props) => {
 				isCart: isCart,
 				setIsCart: setIsCart,
 				setProductList: setProductList,
+				cartProductCount: cartProductCount,
+				setCartProductCount: setCartProductCount,
 			}}>
 			{props.children}
 		</CartContext.Provider>

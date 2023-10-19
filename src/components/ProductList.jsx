@@ -4,7 +4,8 @@ import { useState } from 'react';
 import CartContext from '../context/CartContext';
 
 const ProductList = ({ product }) => {
-	const { productList, setProductList, addProductList, setAddProductList } = useContext(CartContext);
+	const { productList, setProductList, addProductList, setAddProductList, setCartProductCount } =
+		useContext(CartContext);
 	const [productCount, setProductCount] = useState(1);
 
 	const countHandler = (e) => {
@@ -26,8 +27,11 @@ const ProductList = ({ product }) => {
 			updatedProductList[index].count = parseInt(productCount, 10);
 
 			setProductList(updatedProductList);
-
-			setAddProductList([...addProductList, updatedProductList[index]]);
+			const isProductInCart = addProductList.some((item) => item.id === product.id);
+			if (!isProductInCart) {
+				setAddProductList([...addProductList, updatedProductList[index]]);
+				setCartProductCount((prevCount) => prevCount + 1);
+			}
 		}
 	};
 

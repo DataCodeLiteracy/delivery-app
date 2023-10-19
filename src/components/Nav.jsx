@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import CartContext from '../context/CartContext';
 
 const Nav = () => {
-	const { setIsCart } = useContext(CartContext);
+	const { setIsCart, cartProductCount } = useContext(CartContext);
 	const handleCartClick = () => {
 		setIsCart(true);
 	};
@@ -39,7 +39,7 @@ const Nav = () => {
 						width: 20px;
 						text-align: center;
 					`}>
-					1
+					{cartProductCount}
 				</div>
 			</button>
 		</nav>
