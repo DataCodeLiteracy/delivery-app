@@ -1,6 +1,25 @@
 import { css } from '@emotion/css';
+import { useContext } from 'react';
+import CartContext from '../context/CartContext';
 
 const CartProductList = ({ product }) => {
+	const { addProductList, setAddProductList } = useContext(CartContext);
+
+	const handleCalculate = (option) => {
+		const index = addProductList.findIndex((item) => item.id === product.id);
+		if (index !== -1) {
+			const updatedProductList = [...addProductList];
+
+			if (option === 'plus') {
+				updatedProductList[index].count += 1;
+			} else if (option === 'minus' && updatedProductList[index].count >= 2) {
+				updatedProductList[index].count -= 1;
+			}
+
+			setAddProductList(updatedProductList);
+		}
+	};
+
 	return (
 		<li
 			className={css`
@@ -38,8 +57,8 @@ const CartProductList = ({ product }) => {
 						width: 30px;
 					}
 				`}>
-				<button>-</button>
-				<button>+</button>
+				<button onClick={() => handleCalculate('minus')}>-</button>
+				<button onClick={() => handleCalculate('plus')}>+</button>
 			</div>
 		</li>
 	);
