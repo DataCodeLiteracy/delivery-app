@@ -4,9 +4,13 @@ const CartContext = React.createContext({
 	productList: [],
 	addProductList: [],
 	isCart: false,
+	isPay: false,
+	totalCount: 0,
+	setIsPay: () => {},
 	setIsCart: () => {},
 	setProductList: () => {},
 	setAddProductList: () => {},
+	setTotalCount: () => {},
 });
 
 export const CartContextProvider = (props) => {
@@ -33,7 +37,9 @@ export const CartContextProvider = (props) => {
 	const [addProductList, setAddProductList] = useState([]);
 
 	const [isCart, setIsCart] = useState(false);
+	const [isPay, setIsPay] = useState(false);
 	const [cartProductCount, setCartProductCount] = useState(0);
+	const [totalCount, setTotalCount] = useState(0);
 
 	return (
 		<CartContext.Provider
@@ -43,9 +49,13 @@ export const CartContextProvider = (props) => {
 				setAddProductList: setAddProductList,
 				isCart: isCart,
 				setIsCart: setIsCart,
+				isPay: isPay,
+				setIsPay: setIsPay,
 				setProductList: setProductList,
 				cartProductCount: cartProductCount,
 				setCartProductCount: setCartProductCount,
+				totalCount: totalCount,
+				setTotalCount: setTotalCount,
 			}}>
 			{props.children}
 		</CartContext.Provider>
