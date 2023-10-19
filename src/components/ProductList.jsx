@@ -1,6 +1,36 @@
 import { css } from '@emotion/css';
+import { useContext } from 'react';
+import { useState } from 'react';
+import CartContext from '../context/CartContext';
 
 const ProductList = ({ product }) => {
+	const { productList, setProductList, addProductList, setAddProductList } = useContext(CartContext);
+	const [productCount, setProductCount] = useState(1);
+
+	const countHandler = (e) => {
+		setProductCount(e.target.value);
+	};
+
+	const handleClick = (e) => {
+		setProductCount(Number(productCount));
+		if (isNaN(productCount) || productCount === 0) {
+			alert('0 또는 문자는 입력할 수 없습니다.');
+			setProductCount(1);
+		}
+
+		const updatedProductList = [...productList];
+
+		const index = updatedProductList.findIndex((item) => item.id === product.id);
+
+		if (index !== -1) {
+			updatedProductList[index].count = parseInt(productCount, 10);
+
+			setProductList(updatedProductList);
+
+			setAddProductList([...addProductList, updatedProductList[index]]);
+		}
+	};
+
 	return (
 		<li
 			className={css`
@@ -30,7 +60,8 @@ const ProductList = ({ product }) => {
 					<span>수량</span>
 					<input
 						type="text"
-						value={product.count}
+						value={productCount}
+						onChange={countHandler}
 						className={css`
 							text-align: center;
 							margin-left: 10px;
@@ -38,6 +69,7 @@ const ProductList = ({ product }) => {
 					/>
 				</div>
 				<button
+					onClick={handleClick}
 					className={css`
 						width: 80%;
 						margin: 5px 0 0 30px;

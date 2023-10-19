@@ -1,11 +1,12 @@
 import { css } from '@emotion/css';
 import Nav from './components/Nav';
 import Product from './Product';
-import { useState } from 'react';
 import Cart from './Cart';
+import { useContext } from 'react';
+import CartContext from './context/CartContext';
 
 function App() {
-	const [isCart, setIsCart] = useState(false);
+	const { isCart } = useContext(CartContext);
 
 	return (
 		<main
@@ -14,7 +15,7 @@ function App() {
 				margin: auto;
 			`}>
 			{isCart && <Cart />}
-			<Nav setIsCart={setIsCart} />
+			<Nav />
 			<Product />
 		</main>
 	);

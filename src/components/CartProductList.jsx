@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-const CartProductList = () => {
+const CartProductList = ({ product }) => {
 	return (
 		<li
 			className={css`
@@ -14,7 +14,7 @@ const CartProductList = () => {
 				padding: 10px;
 			`}>
 			<div>
-				<span>피자</span>
+				<span>{product.name}</span>
 				<div
 					className={css`
 						margin-top: 10px;
@@ -25,9 +25,9 @@ const CartProductList = () => {
 							width: 50px;
 						}
 					`}>
-					<span>20000원 </span>
+					<span>{product.price}원 </span>
 					<span>x</span>
-					<input type="text" value={1} />
+					<input type="text" value={product.count} />
 				</div>
 			</div>
 			<div

@@ -1,6 +1,9 @@
 import { css } from '@emotion/css';
+import { useContext } from 'react';
+import CartContext from '../context/CartContext';
 
-const Nav = ({ setIsCart }) => {
+const Nav = () => {
+	const { setIsCart } = useContext(CartContext);
 	const handleCartClick = () => {
 		setIsCart(true);
 	};

@@ -1,29 +1,10 @@
 import { css } from '@emotion/css';
-import { useState } from 'react';
 import ProductList from './components/ProductList';
+import { useContext } from 'react';
+import CartContext from './context/CartContext';
 
 const Product = () => {
-	const [productList, setProductList] = useState([
-		{
-			id: 1,
-			name: '피자',
-			price: 20000,
-			count: 1,
-		},
-		{
-			id: 2,
-			name: '김치찌개',
-			price: 9000,
-			count: 2,
-		},
-		{
-			id: 3,
-			name: '자장면',
-			price: 6500,
-			count: 1,
-		},
-	]);
-
+	const { productList } = useContext(CartContext);
 	return (
 		<ul
 			className={css`
