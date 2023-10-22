@@ -1,6 +1,26 @@
 import { css } from '@emotion/css';
+import { useContext } from 'react';
+import CartContext from '../context/CartContext';
 
 const CartInfo = () => {
+	const { setIsCart, addProductList, totalCount, setTotalCount, setIsPay } = useContext(CartContext);
+
+	const handleCancel = () => {
+		setIsCart(false);
+	};
+
+	const calculateTotalPrice = () => {
+		const totalCount = addProductList.reduce((total, product) => {
+			return total + product.price * product.count;
+		}, 0);
+		return totalCount;
+	};
+	setTotalCount(calculateTotalPrice());
+
+	const handlePay = () => {
+		setIsPay(true);
+	};
+
 	return (
 		<div
 			className={css`
@@ -21,7 +41,7 @@ const CartInfo = () => {
 						margin-right: 10px;
 					}
 				`}>
-				<span>20000원</span>
+				<span>{totalCount}원</span>
 				<div
 					className={css`
 						margin-top: 5px;
@@ -31,8 +51,8 @@ const CartInfo = () => {
 							cursor: pointer;
 						}
 					`}>
-					<button>취소</button>
-					<button>결제</button>
+					<button onClick={handleCancel}>취소</button>
+					<button onClick={handlePay}>결제</button>
 				</div>
 			</div>
 		</div>

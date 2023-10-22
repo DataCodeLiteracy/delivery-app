@@ -1,6 +1,8 @@
 import { css } from '@emotion/css';
 import CartProduct from './CartProduct';
 import CartInfo from './CartInfo';
+import { useContext } from 'react';
+import CartContext from '../context/CartContext';
 
 const CartModal = () => {
 	return (

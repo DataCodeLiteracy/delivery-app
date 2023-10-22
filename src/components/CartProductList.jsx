@@ -1,6 +1,25 @@
 import { css } from '@emotion/css';
+import { useContext } from 'react';
+import CartContext from '../context/CartContext';
 
-const CartProductList = () => {
+const CartProductList = ({ product }) => {
+	const { addProductList, setAddProductList } = useContext(CartContext);
+
+	const handleCalculate = (option) => {
+		const index = addProductList.findIndex((item) => item.id === product.id);
+		if (index !== -1) {
+			const updatedProductList = [...addProductList];
+
+			if (option === 'plus') {
+				updatedProductList[index].count += 1;
+			} else if (option === 'minus' && updatedProductList[index].count >= 2) {
+				updatedProductList[index].count -= 1;
+			}
+
+			setAddProductList(updatedProductList);
+		}
+	};
+
 	return (
 		<li
 			className={css`
@@ -14,7 +33,7 @@ const CartProductList = () => {
 				padding: 10px;
 			`}>
 			<div>
-				<span>피자</span>
+				<span>{product.name}</span>
 				<div
 					className={css`
 						margin-top: 10px;
@@ -25,9 +44,9 @@ const CartProductList = () => {
 							width: 50px;
 						}
 					`}>
-					<span>20000원 </span>
+					<span>{product.price}원 </span>
 					<span>x</span>
-					<input type="text" value={1} />
+					<input type="text" value={product.count} />
 				</div>
 			</div>
 			<div
@@ -38,8 +57,8 @@ const CartProductList = () => {
 						width: 30px;
 					}
 				`}>
-				<button>-</button>
-				<button>+</button>
+				<button onClick={() => handleCalculate('minus')}>-</button>
+				<button onClick={() => handleCalculate('plus')}>+</button>
 			</div>
 		</li>
 	);

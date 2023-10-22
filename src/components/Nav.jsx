@@ -1,6 +1,9 @@
 import { css } from '@emotion/css';
+import { useContext } from 'react';
+import CartContext from '../context/CartContext';
 
-const Nav = ({ setIsCart }) => {
+const Nav = () => {
+	const { setIsCart, cartProductCount } = useContext(CartContext);
 	const handleCartClick = () => {
 		setIsCart(true);
 	};
@@ -36,7 +39,7 @@ const Nav = ({ setIsCart }) => {
 						width: 20px;
 						text-align: center;
 					`}>
-					1
+					{cartProductCount}
 				</div>
 			</button>
 		</nav>
